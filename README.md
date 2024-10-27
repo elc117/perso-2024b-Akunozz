@@ -1,4 +1,4 @@
-#Pedra, Papel e Tesoura em Haskell
+<h1>Pedra, Papel e Tesoura em Haskell</h1>
 
 Nome: Breno Rosa
 Curso: Sistemas de Informação
