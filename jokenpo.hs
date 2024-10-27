@@ -1,8 +1,10 @@
 import System.Random (randomRIO)
-
+-- Tipo de dados representando as escolhas possíveis do jogo
 data Escolha = Pedra | Papel | Tesoura deriving (Show, Eq)
+-- Contadores para cada escolha: (Pedra, Papel, Tesoura)
+type Contadores = (Int, Int, Int)
 
--- Função para converter número em escolha
+-- Converte um número inteiro para uma escolha de jogo
 escolha :: Int -> Maybe Escolha
 escolha 1 = Just Pedra
 escolha 2 = Just Papel
@@ -10,74 +12,68 @@ escolha 3 = Just Tesoura
 escolha 9 = Nothing
 escolha _ = Nothing
 
--- Função para o modo Player vs Player, agora com contadores
-playerVSplayer :: Int -> Int -> IO ()
-playerVSplayer vitoriasJogador1 vitoriasJogador2 = do
+-- Função para o modo de jogo Jogador vs Jogador
+jogadorVsJogador :: Contadores -> IO Contadores
+jogadorVsJogador contadores = do
     putStrLn "Jogador 1: Digite [1] para Pedra, [2] para Papel, [3] para Tesoura (ou [9] para voltar ao menu):"
-    input1 <- getLine
-    let escolhaJogador1 = escolha (read input1 :: Int)
+    entrada1 <- getLine
+    let escolhaJogador1 = escolha (read entrada1 :: Int)
 
     case escolhaJogador1 of
-        Nothing -> jogar vitoriasJogador1 vitoriasJogador2 0
-        Just jogador1 -> do
+        Nothing -> return contadores
+        Just jogada1 -> do
             putStrLn "Jogador 2: Digite [1] para Pedra, [2] para Papel, [3] para Tesoura (ou [9] para voltar ao menu):"
-            input2 <- getLine
-            let escolhaJogador2 = escolha (read input2 :: Int)
+            entrada2 <- getLine
+            let escolhaJogador2 = escolha (read entrada2 :: Int)
             case escolhaJogador2 of
-                Nothing -> jogar vitoriasJogador1 vitoriasJogador2 0
-                Just jogador2 -> do
-                    let resultado = determinarVencedor jogador1 jogador2
-                    putStrLn resultado
-                    let (v1, v2) = atualizarVitorias resultado vitoriasJogador1 vitoriasJogador2
-                    putStrLn $ "Vitórias Jogador 1: " ++ show v1 ++ ", Vitórias Jogador 2: " ++ show v2
-                    playerVSplayer v1 v2
+                Nothing -> return contadores
+                Just jogada2 -> do
+                    putStrLn $ determinarVencedor jogada1 jogada2
+                    jogadorVsJogador (atualizarContadores jogada1 (atualizarContadores jogada2 contadores))
 
--- Função para determinar o vencedor no modo Player vs Player
+-- Função que determina quem venceu entre dois jogadores
 determinarVencedor :: Escolha -> Escolha -> String
-determinarVencedor jogador1 jogador2 = 
-    "Jogador 1 escolheu: " ++ show jogador1 ++ "\n" ++
-    "Jogador 2 escolheu: " ++ show jogador2 ++ "\n" ++
+determinarVencedor jogada1 jogada2 = 
+    "Jogador 1 escolheu: " ++ show jogada1 ++ "\n" ++
+    "Jogador 2 escolheu: " ++ show jogada2 ++ "\n" ++
     resultado
   where
     resultado
-      | jogador1 == jogador2 = "Empate!"
-      | (jogador1 == Pedra && jogador2 == Tesoura) ||
-        (jogador1 == Papel && jogador2 == Pedra) ||
-        (jogador1 == Tesoura && jogador2 == Papel) = "Jogador 1 venceu!"
+      | jogada1 == jogada2 = "Empate!"
+      | (jogada1 == Pedra && jogada2 == Tesoura) ||
+        (jogada1 == Papel && jogada2 == Pedra) ||
+        (jogada1 == Tesoura && jogada2 == Papel) = "Jogador 1 venceu!"
       | otherwise = "Jogador 2 venceu!"
 
--- Função para o modo Player vs Computador, agora com contador para o jogador e computador
-playerVScomputador :: Int -> Int -> IO ()
-playerVScomputador vitoriasJogador vitoriasComputador = do
+-- Função para o modo de jogo Jogador vs Computador
+jogadorVsComputador :: Contadores -> IO Contadores
+jogadorVsComputador contadores = do
     putStrLn "Digite [1] para Pedra, [2] para Papel, [3] para Tesoura (ou [9] para voltar ao menu):"
-    input <- getLine
-    let escolhaJogador = escolha (read input :: Int)
+    entrada <- getLine
+    let escolhaJogador = escolha (read entrada :: Int)
 
     case escolhaJogador of
-        Nothing -> jogar vitoriasJogador 0 vitoriasComputador
-        Just jogador -> do
-            computador <- escolhaComputador
-            let resultado = determinarVencedorComp jogador computador
-            putStrLn resultado
-            let (vJogador, vComp) = atualizarVitoriasComp resultado vitoriasJogador vitoriasComputador
-            putStrLn $ "Vitórias Jogador: " ++ show vJogador ++ ", Vitórias Computador: " ++ show vComp
-            playerVScomputador vJogador vComp
+        Nothing -> return contadores
+        Just jogada -> do
+            jogadaComputador <- escolhaComputador
+            putStrLn $ determinarVencedorComputador jogada jogadaComputador
+            jogadorVsComputador (atualizarContadores jogada (atualizarContadores jogadaComputador contadores))
 
--- Função para determinar o vencedor no modo Player vs Computador
-determinarVencedorComp :: Escolha -> Escolha -> String
-determinarVencedorComp jogador1 jogador2 = 
-    "Jogador 1 escolheu: " ++ show jogador1 ++ "\n" ++
-    "Computador escolheu: " ++ show jogador2 ++ "\n" ++
+-- Função que determina o vencedor entre jogador e computador
+determinarVencedorComputador :: Escolha -> Escolha -> String
+determinarVencedorComputador jogada jogadaComputador = 
+    "Jogador escolheu: " ++ show jogada ++ "\n" ++
+    "Computador escolheu: " ++ show jogadaComputador ++ "\n" ++
     resultado
   where
     resultado
-      | jogador1 == jogador2 = "Empate!"
-      | (jogador1 == Pedra && jogador2 == Tesoura) ||
-        (jogador1 == Papel && jogador2 == Pedra) ||
-        (jogador1 == Tesoura && jogador2 == Papel) = "Jogador 1 venceu!"
+      | jogada == jogadaComputador = "Empate!"
+      | (jogada == Pedra && jogadaComputador == Tesoura) ||
+        (jogada == Papel && jogadaComputador == Pedra) ||
+        (jogada == Tesoura && jogadaComputador == Papel) = "Jogador venceu!"
       | otherwise = "Computador venceu!"
 
--- Função para escolha aleatória do computador
+-- Gera uma escolha aleatória para o computador (Pedra, Papel ou Tesoura)
 escolhaComputador :: IO Escolha
 escolhaComputador = do
     num <- randomRIO (1, 3) :: IO Int
@@ -86,43 +82,40 @@ escolhaComputador = do
         2 -> Papel
         3 -> Tesoura
 
--- Função para atualizar o contador de vitórias no modo Player vs Player
-atualizarVitorias :: String -> Int -> Int -> (Int, Int)
-atualizarVitorias resultado vitoriasJogador1 vitoriasJogador2
-    | "Jogador 1 venceu!" `elem` words resultado = (vitoriasJogador1 + 1, vitoriasJogador2)
-    | "Jogador 2 venceu!" `elem` words resultado = (vitoriasJogador1, vitoriasJogador2 + 1)
-    | otherwise = (vitoriasJogador1, vitoriasJogador2)
+-- Atualiza os contadores de acordo com a escolha realizada
+atualizarContadores :: Escolha -> Contadores -> Contadores
+atualizarContadores Pedra (pedra, papel, tesoura) = (pedra + 1, papel, tesoura)
+atualizarContadores Papel (pedra, papel, tesoura) = (pedra, papel + 1, tesoura)
+atualizarContadores Tesoura (pedra, papel, tesoura) = (pedra, papel, tesoura + 1)
 
--- Função para atualizar o contador de vitórias no modo Player vs Computador
-atualizarVitoriasComp :: String -> Int -> Int -> (Int, Int)
-atualizarVitoriasComp resultado vitoriasJogador vitoriasComputador
-    | "Jogador 1 venceu!" `elem` words resultado = (vitoriasJogador + 1, vitoriasComputador)
-    | "Computador venceu!" `elem` words resultado = (vitoriasJogador, vitoriasComputador + 1)
-    | otherwise = (vitoriasJogador, vitoriasComputador)
+-- Exibe o total de vezes que cada escolha foi feita
+exibirContadores :: Contadores -> IO ()
+exibirContadores (pedra, papel, tesoura) = do
+    putStrLn $ "Número de vezes que Pedra foi jogada: " ++ show pedra
+    putStrLn $ "Número de vezes que Papel foi jogado: " ++ show papel
+    putStrLn $ "Número de vezes que Tesoura foi jogada: " ++ show tesoura
 
--- Nova função para exibir as vitórias no menu
-mostrarVitorias :: Int -> Int -> Int -> IO ()
-mostrarVitorias vitoriasJogador1 vitoriasJogador2 vitoriasComputador = do
-    putStrLn $ "Vitórias Jogador 1: " ++ show vitoriasJogador1
-    putStrLn $ "Vitórias Jogador 2: " ++ show vitoriasJogador2
-    putStrLn $ "Vitórias Computador: " ++ show vitoriasComputador
-    jogar vitoriasJogador1 vitoriasJogador2 vitoriasComputador
-
--- Função principal para iniciar o jogo com os contadores de vitórias
-jogar :: Int -> Int -> Int -> IO ()
-jogar vitoriasJogador1 vitoriasJogador2 vitoriasComputador = do
+-- Função principal com menu de opções
+menu :: Contadores -> IO ()
+menu contadores = do
     putStrLn "Escolha o modo de jogo:"
-    putStrLn "[1] Jogar Player vs Player"
-    putStrLn "[2] Jogar Player vs Computador"
-    putStrLn "[4] Mostrar contagem de vitórias"
+    putStrLn "[1] Jogador vs Jogador"
+    putStrLn "[2] Jogador vs Computador"
+    putStrLn "[3] Exibir contadores de jogadas"
     putStrLn "[0] Encerrar o programa"
-    input <- getLine
-    let modo = read input :: Int
-    case modo of
-        1 -> playerVSplayer vitoriasJogador1 vitoriasJogador2
-        2 -> playerVScomputador vitoriasJogador1 vitoriasComputador
-        4 -> mostrarVitorias vitoriasJogador1 vitoriasJogador2 vitoriasComputador
+    entrada <- getLine
+    let opcao = read entrada :: Int
+    case opcao of
+        1 -> jogadorVsJogador contadores >>= menu
+        2 -> jogadorVsComputador contadores >>= menu
+        3 -> do
+            exibirContadores contadores
+            menu contadores
         0 -> putStrLn "Programa encerrado!"
         _ -> do
-            putStrLn "Escolha inválida, tente novamente."
-            jogar vitoriasJogador1 vitoriasJogador2 vitoriasComputador
+            putStrLn "Opção inválida, tente novamente."
+            menu contadores
+
+-- Função inicial que inicia o programa com contadores zerados
+main :: IO ()
+main = menu (0, 0, 0)
