@@ -13,10 +13,10 @@ Curso: Sistemas de Informação </br>
 </ul>
 <h2>Objetivo:</h2>
 Este projeto é um jogo de Pedra, Papel e Tesoura desenvolvido em Haskell. O programa oferece um menu com as opções:</br>
-Jogador vs Jogador </br>
-Jogador vs Computador</br>
-Exibir contadores de jogadas</br>
-Encerrar o programa </br>
+<li>Jogador vs Jogador</li> </br>
+<li>Jogador vs Computador</li></br>
+<li>Exibir contadores de jogadas</li></br>
+<li>Encerrar o programa</li> </br>
 O objetivo é proporcionar um jogo interativo com contadores para o número de vezes que cada escolha (Pedra, Papel ou Tesoura) foi feita, oferecendo uma experiência de jogo leve e educativa.
 
 <h2>Processo de Desenvolvimento</h2>
