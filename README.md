@@ -1,7 +1,7 @@
 <h1>Pedra, Papel e Tesoura em Haskell</h1>
 
-<li>Nome: Breno Rosa</li>
-<li>Curso: Sistemas de Informação</li>
+Nome: Breno Rosa </br>
+Curso: Sistemas de Informação </br>
 
 <h2>Como rodar pelo VScode:</h2>
 <ul>
