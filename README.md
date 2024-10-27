@@ -1,36 +1,40 @@
 <h1>Pedra, Papel e Tesoura em Haskell</h1>
 
-Nome: Breno Rosa </br>
-Curso: Sistemas de Informação </br>
+Nome: Breno Rosa</br>
+Curso: Sistemas de Informação</br>
 
 <h2>Como rodar pelo VScode:</h2>
-<ul>
-<li>1. Tenha instalado o Haskell em seu ambiente.</li>
-<li>2. Digite "ghci" no terminal.</li>
-<li>3. No ghci carregue o programa com ":l jokenpo.hs".</li>
-<li>4. Depois de carregado é só digitar "main".</li>
-<li>5. Escolha as opções do menu para jogar.</li>
-</ul>
+1. Tenha instalado o Haskell em seu ambiente.</br>
+2. Digite "ghci" no terminal.</br>
+3. No ghci carregue o programa com ":l jokenpo.hs".</br>
+4. Depois de carregado é só digitar "main".</br>
+5. Escolha as opções do menu para jogar.</br>
+
 <h2>Objetivo:</h2>
-Este projeto é um jogo de Pedra, Papel e Tesoura desenvolvido em Haskell. O programa oferece um menu com as opções:</br>
-<li>Jogador vs Jogador</li> </br>
-<li>Jogador vs Computador</li></br>
-<li>Exibir contadores de jogadas</li></br>
-<li>Encerrar o programa</li> </br>
-O objetivo é proporcionar um jogo interativo com contadores para o número de vezes que cada escolha (Pedra, Papel ou Tesoura) foi feita, oferecendo uma experiência de jogo leve e educativa.
+Implementar um jogo de Pedra, Papel ou Tesoura com opção de jogar contra o computador e jogador vs jogador. A cada turno, o jogador e o computador fazem suas jogadas e o programa registra quem ganhou. Guarda os resultados e, depois de um certo número de jogadas, mostrar algumas estatísticas gerais.</br>
 
 <h2>Processo de Desenvolvimento</h2>
-O desenvolvimento deste programa seguiu os seguintes passos:</br>
-Estrutura Básica: Inicialmente, foi implementada uma estrutura simples com as funções para permitir o jogo entre dois jogadores e entre jogador e computador.
-Adição dos Contadores: Para cada escolha de jogada (Pedra, Papel, Tesoura), foram adicionados contadores que se incrementam a cada escolha realizada.</br>
-Função de Determinação de Vencedor: Implementou-se uma lógica que avalia as jogadas e define o vencedor.</br>
-Testes e Depuração: Foram feitas várias execuções para testar o programa, identificando e corrigindo erros. O programa foi corrigido, por exemplo, em relação à entrada de dados e na estrutura de repetição de partidas.</br>
-Referências Consultadas: Durante o desenvolvimento, foram consultados materiais sobre Haskell, estruturas condicionais, e uso de variáveis tipo Maybe para melhorar a robustez do código.
+Inicialmente, foi implementado as funções para permitir o jogo entre dois jogadores e entre jogador e computador e as funções que avalia as jogadas e define o vencedor(Após muita dor de cabeça para entender como funcionaria o jogo). Depois foi feito a adição dos contadores que se incrementam a cada escolha realizada.</br>
+Referências Consultadas: Documentação oficial do Haskell, vídeos no YouTube sobre Haskell, exemplos de códigos da internet.</br>
 
 <h2>Resultado Final</h2>
-Para demonstrar a execução do programa, aqui está um exemplo em GIF:
+Este projeto é um jogo de Pedra, Papel e Tesoura desenvolvido em Haskell. O programa oferece um menu com as opções:</br>
+<li>Jogador vs Jogador</li>
+<li>Jogador vs Computador</li>
+<li>Exibir quantidade de jogadas</li>
+<li>Exibir quantidade de vitórias/empates</li>
+<li>Encerrar o programa</li>
+Onde após escolher Jogador vs Jogador o programa solicita para o jogador1 escolher entre Pedra, Papel ou Tesoura, depois é a vez do jogador2 fazer a escolha, ao final o programa print a escolha dos dois e mostra o vencedor ou printa "Empate" em caso de empate.</br>
+Na escolha contra o computador acontece a mesma coisa, porém com uma função do System.Random o computador gera aleatóriamente a sua escolha.</br>
+Na opção de Exibir quantidade de jogadas o programa mostra a quantidade de vezes em que foi lançada cada escolha e a sua porcentagem em relação a quantidade total de opções escolhidas.</</br>
+Por último, na opção de Exibir quantidade de vitórias/empates o programa mostra a quantidade de empates do jogo inteiro e a quantas vezes cada jogador ganhou, sendo o jogador1 contando tanto para o jogo contra o jogador2 tanto para contra o computador.</br>
+Para demonstrar a execução do programa, aqui está um link para um vídeo curto no Youtube:</br>
 
-<h2>Referências e Créditos:</h2>
-Documentação de Haskell (para operações básicas e manipulação de listas).</br>
-Exemplos de uso do tipo Maybe para manipulação de valores opcionais em Haskell.</br>
-Prompts de ajuda: várias sugestões e modificações de comentários e variáveis foram feitas com o auxílio de um assistente virtual (ChatGPT) para tornar o código mais legível e funcional.
+<h2>Referências e Créditos</h2>
+https://haskell.pesquisa.ufabc.edu.br/haskell/</br>
+https://www.youtube.com/playlist?list=PLYItvall0TqJ25sVTLcMhxsE0Hci58mpQ</br>
+https://www.youtube.com/watch?v=fP0srOQVGB8</br>
+https://www.haskell.org/documentation/</br>
+https://www.youtube.com/watch?v=kpBJ-FwKNyE</br>
+Prompts:</br>
+Em geral foi usado recursos de IA para ter ideias do como fazer uma certa função e também para interpretar vários erros no ghci, além de melhorar algumas lógicas do programa.</br>
