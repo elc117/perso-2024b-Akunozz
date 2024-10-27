@@ -29,6 +29,7 @@ Na escolha contra o computador acontece a mesma coisa, porém com uma função d
 Na opção de Exibir quantidade de jogadas o programa mostra a quantidade de vezes em que foi lançada cada escolha e a sua porcentagem em relação a quantidade total de opções escolhidas.</</br>
 Por último, na opção de Exibir quantidade de vitórias/empates o programa mostra a quantidade de empates do jogo inteiro e a quantas vezes cada jogador ganhou, sendo o jogador1 contando tanto para o jogo contra o jogador2 tanto para contra o computador.</br>
 Para demonstrar a execução do programa, aqui está um link para um vídeo curto no Youtube:</br>
+https://youtu.be/wsl2NEeOSDc </br>
 
 <h2>Referências e Créditos</h2>
 https://haskell.pesquisa.ufabc.edu.br/haskell/</br>
