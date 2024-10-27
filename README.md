@@ -1,15 +1,16 @@
 <h1>Pedra, Papel e Tesoura em Haskell</h1>
 
-Nome: Breno Rosa
-Curso: Sistemas de Informação
+<li>Nome: Breno Rosa</li>
+<li>Curso: Sistemas de Informação</li>
 
 <h2>Como rodar pelo VScode:</h2>
-1. Tenha instalado o Haskell em seu ambiente.
-2. Digite "ghci" no terminal.
-3. No ghci carregue o programa com ":l jokenpo.hs".
-4. Depois de carregado é só digitar "main".
-5. Escolha as opções do menu para jogar.
-
+<ul>
+<li>1. Tenha instalado o Haskell em seu ambiente.</li>
+<li>2. Digite "ghci" no terminal.</li>
+<li>3. No ghci carregue o programa com ":l jokenpo.hs".</li>
+<li>4. Depois de carregado é só digitar "main".</li>
+<li>5. Escolha as opções do menu para jogar.</li>
+</ul>
 <h2>Objetivo:</h2>
 Este projeto é um jogo de Pedra, Papel e Tesoura desenvolvido em Haskell. O programa oferece um menu com as opções:
 Jogador vs Jogador
@@ -29,8 +30,7 @@ Referências Consultadas: Durante o desenvolvimento, foram consultados materiais
 <h2>Resultado Final</h2>
 Para demonstrar a execução do programa, aqui está um exemplo em GIF:
 
-<h2>Referências e Créditos</h2>
-Este programa foi desenvolvido com base em conceitos de programação funcional em Haskell, com algumas pesquisas adicionais em fontes como:
-Documentação de Haskell (para operações básicas e manipulação de listas)
-Exemplos de uso do tipo Maybe para manipulação de valores opcionais em Haskell
-Prompts de ajuda: várias sugestões e modificações de comentários e variáveis foram feitas com o auxílio de um assistente virtual (ChatGPT) para tornar o código mais legível e funcional.
+<h2>Referências e Créditos:</h2>
+- Documentação de Haskell (para operações básicas e manipulação de listas).
+- Exemplos de uso do tipo Maybe para manipulação de valores opcionais em Haskell
+- Prompts de ajuda: várias sugestões e modificações de comentários e variáveis foram feitas com o auxílio de um assistente virtual (ChatGPT) para tornar o código mais legível e funcional.
